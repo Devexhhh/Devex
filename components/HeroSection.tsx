@@ -21,7 +21,7 @@ export default function HeroSection() {
         className="fade-in fade-in-2 font-display font-extrabold leading-none tracking-tighter mb-4 text-[#f1f0ff]"
         style={{ fontSize: "clamp(56px, 10vw, 100px)" }}
       >
-        <span className="shimmer-text">Vansh</span>
+        <span className="shimmer-text">Devex</span>
       </h1>
 
       <h2
