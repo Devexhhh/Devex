@@ -5,7 +5,7 @@ import { NAV_LINKS } from "@/lib/data";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [time, setTime]         = useState("");
+  const [time, setTime] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -35,7 +35,7 @@ export default function Navbar() {
       <div className="mx-auto w-full max-w-3xl h-full flex items-center justify-between px-6">
 
         <span className="font-display font-extrabold text-[16px] tracking-tight shrink-0">
-          <span className="shimmer-text">Vansh</span>
+          <span className="shimmer-text">Devex</span>
         </span>
 
         <div className="flex items-center gap-7">
@@ -57,7 +57,7 @@ export default function Navbar() {
             </span>
           )}
           <div className="flex gap-2">
-            {[["GH","#"],["in","#"],["𝕏","#"]].map(([label, href]) => (
+            {[["GH", "#"], ["in", "#"], ["𝕏", "#"]].map(([label, href]) => (
               <a key={label} href={href}
                 className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.02] flex items-center justify-center font-mono text-[11px] text-white/40 hover:border-violet-500/50 hover:text-violet-300 hover:bg-violet-500/[0.08] transition-all duration-200 no-underline"
               >
