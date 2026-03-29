@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import Tag from "./Tag";
+import BorderGlow from "@/app/ui/BorderGlow";
 
 interface Project {
   title: string;
@@ -8,60 +7,58 @@ interface Project {
   tags: string[];
   status: string;
   color: string;
-  emoji: string;
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={`
-        relative overflow-hidden rounded-2xl p-7 cursor-pointer
-        border transition-all duration-300
-        ${hovered
-          ? "border-violet-500/40 bg-violet-500/[0.04] -translate-y-1 shadow-[0_12px_40px_rgba(124,58,237,0.12)]"
-          : "border-white/[0.07] bg-white/[0.01]"
-        }
-      `}
+    <BorderGlow
+      edgeSensitivity={55}
+      // coneSpread={40}
+      fillOpacity={0}         // <-- Ensure this is exactly 0
+      glowRadius={12}
+      glowIntensity={1}
+
+      glowColor="260 80 60"
+      backgroundColor="0f0f11"
+      borderRadius={12}
+      colors={['#7c3aed', '#a855f7', '#38bdf8']}
+      className="w-full h-full group !border-white/5 hover:!border-white/10 transition-colors duration-300 noisy-glass"
     >
-      {/* Animated top color line */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-500"
-        style={{
-          background: hovered
-            ? `linear-gradient(90deg, ${project.color}, transparent 70%)`
-            : "transparent",
-        }}
-      />
+      <div className="p-5 flex flex-col h-full w-full">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-mono font-bold text-[16px] text-white">{project.title}</h3>
+          <div className="flex gap-2 text-white/30">
+            <span className="cursor-pointer hover:text-white transition-colors">📌</span>
+            <span className="cursor-pointer hover:text-white transition-colors">🔗</span>
+          </div>
+        </div>
 
-      {/* Header */}
-      <div className="flex justify-between items-start mb-5">
-        <span className="text-3xl">{project.emoji}</span>
-        <span
-          className={`
-            font-mono text-[11px] px-3 py-1 rounded-full border tracking-wide
-            ${project.status === "Functional"
-              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-              : "bg-amber-500/10 text-amber-300 border-amber-500/20"
-            }
-          `}
-        >
-          ● {project.status}
-        </span>
-      </div>
+        {/* Image Placeholder */}
+        <div className="w-full h-40 rounded-lg mb-5 overflow-hidden border border-white/5 relative flex items-center justify-center"
+          style={{ background: `linear-gradient(135deg, #111, ${project.color}20)` }}>
+          <span className="font-mono text-white/20 text-xs">Thumbnail</span>
+          {/* Glow behind image */}
+          <div className="absolute inset-0 bg-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+        </div>
 
-      <h3 className="font-display font-bold text-[20px] text-[#f1f0ff] mb-2.5 tracking-tight">
-        {project.title}
-      </h3>
-      <p className="text-[14px] text-white/45 leading-relaxed mb-6">
-        {project.desc}
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {project.tags.map((t) => <Tag key={t}>{t}</Tag>)}
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex gap-2">
+            {/* Mock Tech Icons */}
+            <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-[10px]">⚛</div>
+            <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-[10px]">TS</div>
+            <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-[10px]">S</div>
+          </div>
+
+          <span className="font-mono text-[10px] px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 flex items-center gap-1.5 border border-emerald-500/20">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            {project.status}
+          </span>
+        </div>
+
+        <p className="font-mono text-[12px] text-white/40 leading-relaxed">
+          {project.desc}
+        </p>
       </div>
-    </div>
+    </BorderGlow>
   );
 }
