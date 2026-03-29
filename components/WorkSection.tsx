@@ -3,33 +3,19 @@ import ProjectCard from "./ProjectCard";
 
 export default function WorkSection() {
   return (
-    <section id="work" className="px-6 pb-20">
-      <p className="font-mono text-[11px] text-violet-500 tracking-[0.12em] mb-2 uppercase">
-        03 ■
-      </p>
-      <h2
-        className="font-display font-bold text-[#f1f0ff] leading-tight mb-3"
-        style={{ fontSize: "clamp(28px, 5vw, 40px)" }}
-      >
-        Featured Work
-      </h2>
-      <p className="font-mono text-[13px] text-white/30 mb-10 tracking-wide">
-        Things I&apos;ve built and shipped.
-      </p>
+    <section id="work" className="px-6 py-16">
+      <div className="flex items-center gap-4 mb-8">
+        <span className="font-mono text-[13px] text-white/40">03 ■</span>
+        <h2 className="font-mono text-[18px] text-[#f1f0ff]">Featured Work</h2>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {PROJECTS.map((p) => <ProjectCard key={p.title} project={p} />)}
       </div>
 
-      <div className="mt-10 flex justify-center">
-        <button className="
-          inline-flex items-center gap-2 px-6 py-3 rounded-xl
-          font-mono text-[13px] tracking-wide text-white/55
-          bg-transparent border border-white/10
-          hover:border-white/25 hover:text-white/85 hover:-translate-y-0.5
-          transition-all duration-200 cursor-pointer
-        ">
-          ⌘ View All Projects
+      <div className="mt-8 flex justify-center">
+        <button className="flex items-center gap-2 px-6 py-2 rounded-md bg-white text-black font-mono text-[12px] font-semibold hover:bg-white/90 transition-colors">
+          ❖ VIEW ALL PROJECTS
         </button>
       </div>
     </section>
