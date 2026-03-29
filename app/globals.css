@@ -1,9 +1,20 @@
 @import "tailwindcss";
 
 @layer base {
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  ::selection { background: rgba(124, 58, 237, 0.35); }
-  html { scroll-behavior: smooth; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  ::selection {
+    background: rgba(124, 58, 237, 0.35);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background: #0a0a0f;
     color: #e8e6ff;
@@ -12,26 +23,23 @@
 }
 
 @layer utilities {
+
   /* Diagonal hatch for side gutters */
   .hatch-bg {
-    background-image: repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 4px,
-      rgba(255, 255, 255, 0.025) 4px,
-      rgba(255, 255, 255, 0.025) 5px
-    );
+    background-image: repeating-linear-gradient(-45deg,
+        transparent,
+        transparent 4px,
+        rgba(255, 255, 255, 0.025) 4px,
+        rgba(255, 255, 255, 0.025) 5px);
   }
 
   /* Shimmer on name */
   .shimmer-text {
-    background: linear-gradient(
-      90deg,
-      #7c3aed 0%,
-      #a78bfa 40%,
-      #e879f9 60%,
-      #7c3aed 100%
-    );
+    background: linear-gradient(90deg,
+        #7c3aed 0%,
+        #a78bfa 40%,
+        #e879f9 60%,
+        #7c3aed 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -40,25 +48,79 @@
   }
 
   /* Entrance animations */
-  .fade-in   { animation: fadeUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both; }
-  .fade-in-1 { animation-delay: 0.10s; }
-  .fade-in-2 { animation-delay: 0.22s; }
-  .fade-in-3 { animation-delay: 0.38s; }
-  .fade-in-4 { animation-delay: 0.54s; }
-  .fade-in-5 { animation-delay: 0.70s; }
+  .fade-in {
+    animation: fadeUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
 
-  .pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
+  .fade-in-1 {
+    animation-delay: 0.10s;
+  }
+
+  .fade-in-2 {
+    animation-delay: 0.22s;
+  }
+
+  .fade-in-3 {
+    animation-delay: 0.38s;
+  }
+
+  .fade-in-4 {
+    animation-delay: 0.54s;
+  }
+
+  .fade-in-5 {
+    animation-delay: 0.70s;
+  }
+
+  .pulse-dot {
+    animation: pulseDot 2s ease-in-out infinite;
+  }
 }
 
 @keyframes shimmer {
-  from { background-position: -200% center; }
-  to   { background-position:  200% center; }
+  from {
+    background-position: -200% center;
+  }
+
+  to {
+    background-position: 200% center;
+  }
 }
+
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 @keyframes pulseDot {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.25; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@layer utilities {
+  .noisy-glass {
+    @apply bg-[#0a0a0c]/40 backdrop-blur-xl relative z-10;
+  }
+
+  .noisy-glass::before {
+    content: "";
+    @apply absolute inset-0 pointer-events-none rounded-[inherit] -z-10;
+    /* Pure SVG Fractal Noise */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.06;
+  }
 }
