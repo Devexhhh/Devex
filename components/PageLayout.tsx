@@ -1,32 +1,32 @@
 export default function PageLayout({ children }: { children: React.ReactNode }) {
   return (
-    // Notice we removed the background color here
-    <div className="relative min-h-screen w-full flex justify-center bg-transparent text-white selection:bg-violet-500/30">
+    <div className="relative min-h-screen w-full py-5 selection:bg-violet-500/30 overflow-x-hidden">
 
-      {/* Left hatch gutter */}
-      <div
-        className="hidden lg:block fixed top-0 bottom-0 left-0 pointer-events-none z-0"
-        style={{
-          width: "calc((100vw - 768px) / 3)",
-          borderRight: "1px solid rgba(255,255,255,0.05)",
-          backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px)"
-        }}
-      />
+      {/* THE SCHEMATIC HUD OVERLAY (Fixed to viewport, sits behind content but over Aurora) */}
+      <div className="fixed inset-0 pointer-events-none z-0 flex justify-center">
 
-      {/* Right hatch gutter */}
-      <div
-        className="hidden lg:block fixed top-0 bottom-0 right-0 pointer-events-none z-0"
-        style={{
-          width: "calc((100vw - 768px) / 3)",
-          borderLeft: "1px solid rgba(255,255,255,0.05)",
-          backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px)"
-        }}
-      />
+        {/* Narrow Left Striped Track (48px wide) */}
+        {/* border-l creates the outer boundary line, the center track provides the inner line */}
+        <div className="hidden lg:block w-[40px] shrink-0 border-l border-white/10 diagonal-stripes" />
 
-      {/* Centered content column */}
-      <div className="relative z-10 w-full max-w-4xl pt-24 pb-12">
-        {children}
+        {/* Center Content Track (800px) */}
+        <div className="relative w-full max-w-[800px] shrink-0 border-x border-transparent lg:border-white/10">
+          {/* Top Area Dotted Grid (like the reference image header) */}
+          <div className="absolute top-0 w-full h-[400px] bg-dot-grid mask-fade-out" />
+        </div>
+
+        {/* Narrow Right Striped Track (48px wide) */}
+        {/* border-r creates the outer boundary line */}
+        <div className="hidden lg:block w-[40px] shrink-0 border-r border-white/10 diagonal-stripes" />
+
       </div>
+
+      {/* MAIN CONTENT CONTAINER */}
+      {/* We wrap children in a matching 800px column so it aligns perfectly with the HUD above */}
+      <main className="relative z-10 w-full max-w-[800px] mx-auto flex flex-col px-4 md:px-0">
+        {children}
+      </main>
+
     </div>
   );
 }
