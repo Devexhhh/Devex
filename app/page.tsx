@@ -6,6 +6,7 @@ import WorkSection from "@/components/WorkSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SoftAurora from "./ui/SoftAurora";
+import BottomDock from "@/components/BottomDock";
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
       <div className="fixed inset-0 pointer-events-none z-0 bg-[#050505]/70 mix-blend-multiply" />
 
       <Navbar />
+      <BottomDock />
 
       <PageLayout>
         <HeroSection />
