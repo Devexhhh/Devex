@@ -1,6 +1,6 @@
 "use client";
 import PixelCard from "@/app/ui/PixelCard";
-import GlassIcons from "@/app/ui/GlassIcons";// Adjust path if it's in @/app/ui/GlassIcons
+import GlassIcons from "@/app/ui/GlassIcons";
 
 export default function ContactSection() {
   // Data for the 3D Glass Icons
@@ -11,7 +11,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="px-6 py-16 relative">
+    <section id="contact" className="blueprint-section blueprint-crosshair-left blueprint-crosshair-right px-6">
 
       {/* Scope all the custom keyframes here */}
       <style>{`
