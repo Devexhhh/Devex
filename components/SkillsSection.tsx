@@ -2,7 +2,7 @@ import { SKILLS } from "@/lib/data";
 
 export default function SkillsSection() {
   return (
-    <section className="px-6 pb-20">
+    <section id="skills" className="blueprint-section blueprint-crosshair-left blueprint-crosshair-right px-6">
       <p className="font-mono text-[11px] text-violet-500 tracking-[0.12em] mb-2 uppercase">
         02 ■
       </p>
