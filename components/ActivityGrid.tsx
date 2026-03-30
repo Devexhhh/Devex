@@ -45,34 +45,73 @@ async function getGithubContributions() {
 export default async function ActivityGrid() {
   const calendar = await getGithubContributions();
 
-  // Map GitHub's contribution levels to our harsh grayscale aesthetic
+  // Map GitHub's contribution levels to our violet theme
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "FIRST_QUARTILE": return "bg-white/[0.25]";
-      case "SECOND_QUARTILE": return "bg-white/[0.5]";
-      case "THIRD_QUARTILE": return "bg-white/[0.75]";
-      case "FOURTH_QUARTILE": return "bg-white";
+      case "FIRST_QUARTILE": return "bg-violet-900/60";
+      case "SECOND_QUARTILE": return "bg-violet-700/80";
+      case "THIRD_QUARTILE": return "bg-violet-500";
+      case "FOURTH_QUARTILE": return "bg-violet-400";
       case "NONE":
       default: return "bg-white/[0.03]";
     }
   };
 
+  // Calculate month label positions dynamically
+  let monthLabels: { label: string; index: number }[] = [];
+  if (calendar) {
+    let lastMonth = -1;
+    calendar.weeks.forEach((week: any, i: number) => {
+      const firstDay = week.contributionDays[0];
+      const date = new Date(firstDay.date);
+      const month = date.getMonth();
+
+      // If the month changed, record the label and its column index
+      if (month !== lastMonth && i < calendar.weeks.length - 2) {
+        monthLabels.push({
+          label: date.toLocaleString('default', { month: 'short' }),
+          index: i
+        });
+        lastMonth = month;
+      }
+    });
+
+    // FIX: Overlap prevention for the rolling year edge-case.
+    // If the distance between the first and second label is less than 3 columns (< 45px),
+    // we chop off the first partial month label to keep the UI clean.
+    if (monthLabels.length > 1 && monthLabels[1].index - monthLabels[0].index < 3) {
+      monthLabels.shift();
+    }
+  }
+
   return (
-    // Added classes to obliterate the scrollbar across all browsers
     <div className="mt-12 w-full overflow-x-auto pb-4 pt-8 relative [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-      {/* Added pr-8 so the grid doesn't slam against the right edge when fully scrolled */}
       <div className="w-max min-w-full pr-8">
 
-        <div className="flex justify-between items-end mb-3">
+        <div className="flex justify-between items-end mb-4">
           <p className="font-mono text-[11px] text-white/30 uppercase tracking-widest">
             {calendar ? `${calendar.totalContributions} Contributions in the last year` : "Activity Loading..."}
           </p>
         </div>
 
+        {/* Month Labels Row */}
+        {calendar && (
+          <div className="relative h-5 text-[10px] font-mono text-white/40 flex w-full">
+            {monthLabels.map((m, i) => (
+              <span
+                key={i}
+                className="absolute top-0"
+                // Cell width (w-3 = 12px) + gap (3px) = 15px per column
+                style={{ left: `${m.index * 15}px` }}
+              >
+                {m.label}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="flex gap-[3px]">
           {calendar?.weeks.map((week: any, i: number) => {
-            // Smart tooltip positioning: if it's in the last 4 weeks, align it to the right 
-            // instead of centering it, so it never clips outside the scroll container.
             const isLastFewWeeks = i > calendar.weeks.length - 5;
             const tooltipPosition = isLastFewWeeks
               ? "right-0"
@@ -109,13 +148,14 @@ export default async function ActivityGrid() {
           ))}
         </div>
 
+        {/* Legend */}
         <div className="flex justify-end items-center gap-1.5 mt-3 font-mono text-[10px] text-white/30">
           <span className="mr-1">Less</span>
           <div className="w-3 h-3 rounded-[2px] bg-white/[0.03]" />
-          <div className="w-3 h-3 rounded-[2px] bg-white/[0.25]" />
-          <div className="w-3 h-3 rounded-[2px] bg-white/[0.5]" />
-          <div className="w-3 h-3 rounded-[2px] bg-white/[0.75]" />
-          <div className="w-3 h-3 rounded-[2px] bg-white" />
+          <div className="w-3 h-3 rounded-[2px] bg-violet-900/60" />
+          <div className="w-3 h-3 rounded-[2px] bg-violet-700/80" />
+          <div className="w-3 h-3 rounded-[2px] bg-violet-500" />
+          <div className="w-3 h-3 rounded-[2px] bg-violet-400" />
           <span className="ml-1">More</span>
         </div>
 
