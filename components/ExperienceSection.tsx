@@ -3,7 +3,7 @@ import Accordion from "./Accordion";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="px-6 py-16 flex flex-col gap-16">
+    <section id="experience" className="blueprint-section blueprint-crosshair-left blueprint-crosshair-right px-6 flex flex-col gap-16">
 
       {/* Experience Block */}
       <div>
