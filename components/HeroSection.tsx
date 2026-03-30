@@ -12,7 +12,7 @@ export default function HeroSection() {
         </div>
       </div> */}
 
-      <p className="font-mono text-[13px] text-white/40 mb-2">
+      <p className="font-mono text-[13px] text-white/40 mb-2 mt-5">
         Namaste. I&apos;m
       </p>
 
