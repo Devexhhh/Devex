@@ -3,7 +3,7 @@ import ProjectCard from "./ProjectCard";
 
 export default function WorkSection() {
   return (
-    <section id="work" className="px-6 py-16">
+    <section id="work" className="px-6 pt-16">
       <div className="flex items-center gap-4 mb-8">
         <span className="font-mono text-[13px] text-white/40">03 ■</span>
         <h2 className="font-mono text-[18px] text-[#f1f0ff]">Featured Work</h2>
