@@ -124,3 +124,58 @@
     opacity: 0.06;
   }
 }
+
+@layer utilities {
+
+  /* 1. Wider, subtle schematic blueprint stripes */
+  .diagonal-stripes {
+    background-image: repeating-linear-gradient(-45deg,
+        transparent,
+        transparent 8px,
+        rgba(255, 255, 255, 0.08) 8px,
+        rgba(255, 255, 255, 0.08) 9px);
+  }
+
+  /* 2. Cleaned up dotted grid */
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .mask-fade-out {
+    mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+  }
+
+  /* --- THE MASTER HUD RAIL --- */
+  .blueprint-section {
+    @apply relative py-16 border-b border-white/10;
+  }
+
+  /* The Infinite Horizontal Bleeding Line */
+  .blueprint-section::before {
+    content: '';
+    @apply absolute -bottom-[1px] left-[-50vw] w-[200vw] h-[1px] bg-white/10 pointer-events-none -z-10;
+  }
+
+  /* Left & Right Geometric Crosshairs (Drawn mathematically to avoid collision) */
+  .blueprint-section::after {
+    content: '';
+    @apply absolute -bottom-[4px] left-[-4px] h-[9px] pointer-events-none z-10;
+    width: calc(100% + 8px);
+    background-image:
+      /* Left Crosshair (Horiz, Vert) */
+      linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+      linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+      /* Right Crosshair (Horiz, Vert) */
+      linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+      linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+    background-size:
+      9px 1px, 1px 9px,
+      9px 1px, 1px 9px;
+    background-position:
+      left 0px center, left 4px center,
+      right 0px center, right 4px center;
+    background-repeat: no-repeat;
+  }
+}
