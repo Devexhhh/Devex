@@ -35,7 +35,7 @@ export const EDUCATION = [
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" > <path d="M22 10v6M2 10l10-5 10 5-10 5z"> </path><path d="M6 12v5c3 3 9 3 12 0v-5"></path > </svg>
     ),
     descItems: [
-      "Pursuing a Bachelor’s degree in Computer Science Engineering (Data Science).",
+      "Pursuing a Bachelor's degree in Computer Science Engineering (Data Science).",
       "Strengthening problem-solving through DSA while focusing on design-driven frontend development."
     ],
     tags: ["Data Structures and Algorithms", "Object Oriented Programming System", "Database Management System", "Web Development"],
