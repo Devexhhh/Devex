@@ -95,3 +95,80 @@ export const GRID_CELLS = Array.from({ length: 140 }, (_, i) => ({
   active: seeded(i) > 0.72,
   intensity: seeded(i + 140), // offset seed so intensity differs from active
 }));
+
+// ... (keep all your existing exports: NAV_LINKS, SKILLS, EXPERIENCE, EDUCATION, PROJECTS, GRID_CELLS) ...
+
+export const SIDE_QUESTS_DATA = {
+  Anime: [
+    {
+      id: "a1",
+      title: "Dragon Ball",
+      year: "1986",
+      creator: "Akira Toriyama",
+      rating: "10/10",
+      subtitle: "The foundation of modern shonen.",
+      description: "A masterclass in pacing, paneling, and escalation. It teaches that pushing past your perceived limits requires both brutal discipline and maintaining a pure, childlike love for the craft.",
+      image: "/dragonball.jpg",
+      color: "from-orange-600/40 to-blue-900/40"
+    },
+    {
+      id: "a2",
+      title: "Vagabond",
+      year: "1998",
+      creator: "Takehiko Inoue",
+      rating: "10/10",
+      subtitle: "There is no light without dark.",
+      description: "Invincible is just a word. Real strength comes from understanding your own weakness and choosing to grow rather than destroy.",
+      image: "/vagabond.jpg",
+      color: "from-zinc-600/40 to-black"
+    },
+    {
+      id: "a3",
+      title: "Attack on Titan",
+      year: "2013",
+      creator: "Hajime Isayama",
+      rating: "9.5/10",
+      subtitle: "The world is cruel, but also very beautiful.",
+      description: "Freedom requires sacrifice. It teaches that perspective changes everything; the villain in one story is the hero in another.",
+      image: "/aot.jpg",
+      color: "from-red-900/40 to-black"
+    }
+  ],
+  Gaming: [
+    {
+      id: "g1",
+      title: "Batman: Arkham",
+      year: "2009",
+      creator: "Rocksteady",
+      rating: "10/10",
+      subtitle: "Discipline over everything.",
+      description: "Batman stands out because he’s human—no powers, just relentless discipline and preparation. He represents the idea that consistency and mindset can push you beyond natural limits.",
+      image: "/batman.jpg",
+      color: "from-zinc-800/40 to-black"
+    },
+    {
+      id: "g2",
+      title: "Sekiro",
+      year: "2019",
+      creator: "FromSoftware",
+      rating: "10/10",
+      subtitle: "Hesitation is defeat.",
+      description: "You cannot level up your character to bypass the challenge; you have to level up yourself. It is a pure lesson in rhythm, patience, and learning from failure.",
+      image: "/sekiro.jpg",
+      color: "from-orange-900/40 to-black"
+    }
+  ],
+  Drawing: [
+    {
+      id: "d1",
+      title: "Sketching Fundamentals",
+      year: "Ongoing",
+      creator: "Self-Taught",
+      rating: "N/A",
+      subtitle: "Patience in the details.",
+      description: "Art isn't about perfect lines; it's about training your eyes to truly see the world. Every mistake is just a new baseline for improvement.",
+      image: "/drawing.jpg",
+      color: "from-violet-900/40 to-black"
+    }
+  ]
+};
