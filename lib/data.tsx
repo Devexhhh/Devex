@@ -44,25 +44,41 @@ export const EDUCATION = [
 
 export const PROJECTS = [
   {
-    title: "Fluent",
-    desc: "A Duolingo-inspired language learning platform with interactive lessons, XP, hearts, quests, leaderboards, and a reward shop to make learning immersive and addictive.",
-    tags: ["Next.js", "TypeScript", "Supabase"],
+    title: "GhostBoard",
+
+    desc: "An anonymous social platform where users post confessions and interact using ghost identities, featuring real-time voting, ranking algorithms, rate limiting, and moderation — built with a full-stack architecture using React, Express, and MongoDB.",
+
+    tags: ["React", "Express", "MongoDB", "Zod", "Node.js"],
+
     status: "Functional",
-    color: "#7C3AED",
+
+    color: "#1a1a1a",
   },
   {
-    title: "Vanta",
-    desc: "An animated concept e-commerce website built with React and Vite, featuring immersive video backgrounds, GSAP scroll animations, and a One Piece-themed product showcase.",
-    tags: ["React", "GSAP", "Vite"],
+    title: "NexusChat",
+    desc: "A real-time encrypted P2P chat application built with Next.js and WebSockets, featuring a cyberpunk-themed UI with animated circuit grid backgrounds, room-based messaging, and live user presence tracking.",
+    tags: ["Next.js", "WebSockets", "TypeScript", "Tailwind CSS"],
     status: "Functional",
-    color: "#000000",
-  }
-];
+    color: "#03000a",
+  },
+  {
+    title: "NexusChat",
+    desc: "A real-time encrypted P2P chat application built with Next.js and WebSockets, featuring a cyberpunk-themed UI with animated circuit grid backgrounds, room-based messaging, and live user presence tracking.",
+    tags: ["Next.js", "WebSockets", "TypeScript", "Tailwind CSS"],
+    status: "Functional",
+    color: "#03000a",
+  },
+  {
+    title: "Solana Token Launchpad",
 
-export const ME_CORE_ITEMS = [
-  { label: "Anime", icon: "🎌" },
-  { label: "Components", icon: "⚙️" },
-  { label: "Garden", icon: "🌱" },
+    desc: "A decentralized token creation platform built on Solana using React and Web3.js, enabling users to mint SPL tokens with wallet integration, on-chain transactions, and support for the Token-2022 program.",
+
+    tags: ["React", "Solana Web3.js", "SPL Token", "Wallet Adapter", "Blockchain"],
+
+    status: "Functional",
+
+    color: "#9945FF",
+  },
 ];
 
 // Deterministic seeded RNG — same output on server and client every time.
