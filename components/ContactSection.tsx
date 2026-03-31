@@ -1,21 +1,15 @@
 "use client";
+
 import PixelCard from "@/app/ui/PixelCard";
-import GlassIcons from "@/app/ui/GlassIcons";
 import HorizontalSeparator from "@/app/ui/HorizontalSeparator";
+import ParallaxCard from "@/app/ui/ParallaxCard"; // Import the new Parallax Card
+import Link from "next/link";
 
 export default function ContactSection() {
-  // Data for the 3D Glass Icons
-  const sideQuestItems = [
-    { icon: <span className="text-2xl">X</span>, color: 'purple', label: 'Anime' },
-    { icon: <span className="text-2xl">Y</span>, color: 'blue', label: 'Gaming' },
-    { icon: <span className="text-2xl">Z</span>, color: 'orange', label: 'Drawing' },
-  ];
-
   return (
     <>
       <section id="contact" className="px-6">
 
-        {/* Removed animate-float-3 completely since the arrow no longer needs to float */}
         <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -32,12 +26,15 @@ export default function ContactSection() {
           <h2 className="font-mono text-[18px] text-[#f1f0ff]">Side-Quests</h2>
         </div>
 
-        <div className="mb-10 mt-15">
-          <GlassIcons
-            items={sideQuestItems}
-            className="!flex !justify-center !gap-30 !py-8"
-          />
+        {/* Parallax Card linked to Side-Quests page. 
+          Changed 'justify-center' to 'w-full' so the horizontal card spans the column 
+        */}
+        <div className="w-full my-12 relative z-20 px-10">
+          <Link href="/side-quests" className="outline-none focus:outline-none block w-full">
+            <ParallaxCard />
+          </Link>
         </div>
+
         <HorizontalSeparator className="mt-16 pb-16" />
 
         {/* Pixelated Hover Contact Card */}
@@ -68,7 +65,7 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {/* ARROWS - Removed float animation, combined into a single static div that only rotates on hover */}
+              {/* ARROWS */}
               <div className="text-white/50 mx-1 text-2xl mt-[-24px] drop-shadow-lg transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:rotate-180 z-10">
                 ⇄
               </div>
