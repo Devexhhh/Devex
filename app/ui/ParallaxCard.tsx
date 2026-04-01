@@ -64,10 +64,10 @@ export default function ParallaxCard() {
 
                     {/* Bottom Row */}
                     <div className="max-w-md">
-                        <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3 tracking-tight drop-shadow-lg">
+                        <h3 className="text-3xl md:text-4xl font-display font-mono text-white mb-3 tracking-tight drop-shadow-lg">
                             The Archive
                         </h3>
-                        <p className="text-[13px] md:text-sm font-sans text-white/60 leading-relaxed drop-shadow-md">
+                        <p className="text-[13px] md:text-sm font-mono text-white/60 leading-relaxed drop-shadow-md">
                             Explorations outside the code editor. A collection of thoughts, takeaways, and philosophies from anime, gaming, and art.
                         </p>
                     </div>
