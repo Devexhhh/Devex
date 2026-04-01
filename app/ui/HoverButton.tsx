@@ -21,9 +21,9 @@ export default function HoverButton({ href, icon, label, previewImage, previewTe
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-          flex items-center gap-2 px-4 py-2 rounded-xl
+          flex items-center gap-2 px-4 py-2 rounded
           bg-white/[0.05] backdrop-blur-md border border-white/10 
-          font-sans text-[13px] font-medium text-white/80 
+          font-mono text-[12px] font-medium text-white/80 
           hover:bg-white/[0.1] hover:text-white hover:border-white/20
           hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)]
           transition-all duration-300 no-underline cursor-pointer
