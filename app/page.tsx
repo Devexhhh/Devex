@@ -7,12 +7,16 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SoftAurora from "./ui/SoftAurora";
 import BottomDock from "@/components/BottomDock";
+import BackgroundFade from "@/app/ui/BackgroundFade"; // <-- Import it
+import ScrollReveal from "./ui/ScrollReveal";
+import HorizontalSeparator from "./ui/HorizontalSeparator";
+import ActivityGrid from "@/components/ActivityGrid";
 
 export default function Home() {
   return (
     <>
-      {/* 1. The WebGL Aurora Layer */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      {/* Wrap the fixed background in the fade component */}
+      <BackgroundFade className="fixed inset-0 pointer-events-none z-0">
         <SoftAurora
           speed={0.6}
           scale={1.5}
@@ -27,21 +31,39 @@ export default function Home() {
           layerOffset={0.8}
           colorSpeed={2}
           enableMouseInteraction
-          mouseInfluence={0.25}
+          mouseInfluence={0.4}
         />
-      </div>
+      </BackgroundFade>
 
-      {/* 2. Darkening blend layer so your text remains readable */}
       <div className="fixed inset-0 pointer-events-none z-0 bg-[#050505]/70 mix-blend-multiply" />
 
       <Navbar />
       <BottomDock />
 
       <PageLayout>
-        <HeroSection />
-        <ExperienceSection />
-        <WorkSection />
-        <ContactSection />
+        <ScrollReveal yOffset={20}>
+          <HeroSection />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <div className="px-6">
+            <HorizontalSeparator className="mt-16" />
+            <ActivityGrid />
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <ExperienceSection />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <WorkSection />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <ContactSection />
+        </ScrollReveal>
+
         <Footer />
       </PageLayout>
     </>
