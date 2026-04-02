@@ -7,7 +7,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SoftAurora from "./ui/SoftAurora";
 import BottomDock from "@/components/BottomDock";
-import BackgroundFade from "@/app/ui/BackgroundFade"; // <-- Import it
+import BackgroundFade from "@/app/ui/BackgroundFade";
 import ScrollReveal from "./ui/ScrollReveal";
 import HorizontalSeparator from "./ui/HorizontalSeparator";
 import ActivityGrid from "@/components/ActivityGrid";
@@ -15,7 +15,6 @@ import ActivityGrid from "@/components/ActivityGrid";
 export default function Home() {
   return (
     <>
-      {/* Wrap the fixed background in the fade component */}
       <BackgroundFade className="fixed inset-0 pointer-events-none z-0">
         <SoftAurora
           speed={0.6}
@@ -35,7 +34,8 @@ export default function Home() {
         />
       </BackgroundFade>
 
-      <div className="fixed inset-0 pointer-events-none z-0 bg-[#050505]/70 mix-blend-multiply" />
+      {/* Light mode: white wash. Dark mode: dark multiply blend */}
+      <div className="fixed inset-0 pointer-events-none z-0 bg-gray-50/85 dark:bg-[#050505]/70 dark:mix-blend-multiply transition-colors duration-300" />
 
       <Navbar />
       <BottomDock />
