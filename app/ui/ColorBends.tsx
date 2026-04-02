@@ -306,5 +306,13 @@ export default function ColorBends({
         };
     }, []);
 
-    return <div ref={containerRef} className={`w-full h-full relative overflow-hidden ${className}`} style={style} />;
+    // THE FIX: Added invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0
+    // This flips the additive blending logic to work flawlessly on your light theme!
+    return (
+        <div
+            ref={containerRef}
+            className={`w-full h-full relative overflow-hidden transition-all duration-700 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 ${className}`}
+            style={style}
+        />
+    );
 }
