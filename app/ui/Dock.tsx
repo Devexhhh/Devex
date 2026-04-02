@@ -16,7 +16,7 @@ export type DockItemData = {
     label?: React.ReactNode;
     onClick?: () => void;
     className?: string;
-    isSeparator?: boolean; // Added support for the thin dividing lines
+    isSeparator?: boolean;
 };
 
 export type DockProps = {
@@ -72,7 +72,8 @@ function DockItem({
             onFocus={() => isHovered.set(1)}
             onBlur={() => isHovered.set(0)}
             onClick={onClick}
-            className={`relative inline-flex items-center justify-center rounded-full bg-transparent hover:bg-white/[0.08] transition-colors cursor-pointer ${className}`}
+            // Updated hover effect for light and dark modes
+            className={`relative inline-flex items-center justify-center rounded-full bg-transparent hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition-colors cursor-pointer ${className}`}
             tabIndex={0}
             role="button"
             aria-haspopup="true"
@@ -103,7 +104,8 @@ function DockLabel({ children, isHovered }: { children: React.ReactNode; isHover
                     animate={{ opacity: 1, y: -10 }}
                     exit={{ opacity: 0, y: 0 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute -top-10 left-1/2 w-fit whitespace-pre rounded-md border border-white/10 bg-[#0a0a0c]/90 backdrop-blur-md px-3 py-1.5 text-[11px] font-mono tracking-wide text-white shadow-xl pointer-events-none"
+                    // Tooltip updated for light and dark modes
+                    className="absolute -top-10 left-1/2 w-fit whitespace-pre rounded-md border border-black/10 dark:border-white/10 bg-white/90 dark:bg-[#0a0a0c]/90 backdrop-blur-md px-3 py-1.5 text-[11px] font-mono tracking-wide text-black dark:text-white shadow-xl pointer-events-none transition-colors duration-300"
                     style={{ x: '-50%' }}
                 >
                     {children}
@@ -117,9 +119,9 @@ export default function Dock({
     items,
     className = '',
     spring = { mass: 0.1, stiffness: 150, damping: 12 },
-    magnification = 60, // Dialed back slightly for a sleeker look
+    magnification = 60,
     distance = 150,
-    baseItemSize = 44 // Reduced base size to match the tight pill aesthetic
+    baseItemSize = 44
 }: DockProps) {
     const mouseX = useMotionValue(Infinity);
     const isHovered = useMotionValue(0);
@@ -135,15 +137,15 @@ export default function Dock({
                     isHovered.set(0);
                     mouseX.set(Infinity);
                 }}
-                // The Sleek Pill: Auto-height, tight padding, double border aesthetic
-                className={`${className} pointer-events-auto flex items-center justify-center gap-1 rounded-full border border-white/10 bg-[#050505]/60 backdrop-blur-2xl p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5 noisy-glass`}
+                // Dock container updated to support light/dark backgrounds and borders
+                className={`${className} pointer-events-auto flex items-center justify-center gap-1 rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-[#050505]/60 backdrop-blur-2xl p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-black/5 dark:ring-white/5 noisy-glass transition-colors duration-300`}
                 role="toolbar"
                 aria-label="Application dock"
             >
                 {items.map((item, index) => {
-                    // Render a separator line if requested
+                    // Separator updated for light and dark modes
                     if (item.isSeparator) {
-                        return <div key={index} className="w-px h-6 bg-white/10 mx-1.5 shrink-0" />;
+                        return <div key={index} className="w-px h-6 bg-black/10 dark:bg-white/10 mx-1.5 shrink-0 transition-colors duration-300" />;
                     }
 
                     return (
@@ -157,7 +159,8 @@ export default function Dock({
                             magnification={magnification}
                             baseItemSize={baseItemSize}
                         >
-                            <div className="flex items-center justify-center text-white/60 transition-colors duration-200">
+                            {/* THE FIX: Changed text-white/60 to text-black/60 dark:text-white/60 */}
+                            <div className="flex items-center justify-center text-black/60 dark:text-white/60 transition-colors duration-300">
                                 {item.icon}
                             </div>
                             <DockLabel>{item.label}</DockLabel>
