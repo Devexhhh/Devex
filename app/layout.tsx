@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScrolling from "./ui/SmoothScrolling";
+import { ThemeProvider } from "./ThemeProvider";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -28,11 +29,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${syne.variable} ${jetbrainsMono.variable} ${inter.variable} [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
+    <html lang="en" suppressHydrationWarning className={`${syne.variable} ${jetbrainsMono.variable} ${inter.variable} [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
       <body>
-        <SmoothScrolling>
-          {children}
-        </SmoothScrolling>
+        <ThemeProvider>
+          <SmoothScrolling>
+            {children}
+          </SmoothScrolling>
+        </ThemeProvider>
       </body>
     </html >
   );
