@@ -501,13 +501,12 @@ export default function FloatingLines({
         parallaxStrength
     ]);
 
+    // THE FIX: Added invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0
+    // And changed mixBlendMode to use normal blending in light mode, otherwise the white background swallows the lines.
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-full overflow-hidden floating-lines-container"
-            style={{
-                mixBlendMode: mixBlendMode
-            }}
+            className="relative w-full h-full overflow-hidden floating-lines-container transition-all duration-700 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 dark:mix-blend-screen"
         />
     );
 }
