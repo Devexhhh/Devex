@@ -1,4 +1,5 @@
-import { useRef, useEffect } from 'react';
+"use client";
+import React, { useRef, useEffect } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec2 } from 'ogl';
 
 const vertex = `
@@ -6,6 +7,7 @@ attribute vec2 position;
 void main(){gl_Position=vec4(position,0.0,1.0);}
 `;
 
+// ... (Keep your EXACT original fragment string here, I am truncating it for readability but you leave yours intact!) ...
 const fragment = `
 #ifdef GL_ES
 precision lowp float;
@@ -152,5 +154,16 @@ export default function DarkVeil({
             window.removeEventListener('resize', resize);
         };
     }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
-    return <canvas ref={ref} className="w-full h-full block" />;
+
+    return (
+        // THE MAGIC CSS TRICK:
+        // In light mode, 'invert' flips the black background to white.
+        // But doing that also turns purple into green! So we use 'hue-rotate-180' 
+        // to spin the color wheel exactly backward, turning it perfectly back to violet!
+        // In dark mode, 'dark:invert-0' and 'dark:hue-rotate-0' leaves it untouched.
+        <canvas
+            ref={ref}
+            className="w-full h-full block transition-all duration-700 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0"
+        />
+    );
 }
