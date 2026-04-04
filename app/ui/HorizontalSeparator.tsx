@@ -1,16 +1,18 @@
+"use client";
+
 export default function HorizontalSeparator({ className = "" }: { className?: string }) {
     return (
         // Outer container just takes up the 1px vertical space so margins (mt-16) work.
         <div className={`relative w-full h-px ${className}`}>
 
             {/* THE FIX: 
-        left-1/2 and -translate-x-1/2 perfectly centers this container on the screen.
-        w-[100vw] max-w-[800px] forces it to match your exact border column width, 
-        completely ignoring any px-6 padding from parent divs!
-      */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] max-w-[800px] h-px flex items-center pointer-events-none z-10">
+                On mobile, the schematic borders are offset by 20px on each side (total 40px).
+                On md screens, they are offset by 40px on each side (total 80px).
+                Using w-[calc(...)] forces the crosshairs to sit exactly on those HUD border lines!
+            */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[calc(100vw-40px)] md:w-[calc(100vw-80px)] max-w-[800px] h-px flex items-center pointer-events-none z-10">
 
-                {/* 1. Center Line (inside the 800px column) */}
+                {/* 1. Center Line (inside the layout boundary) */}
                 <div className="absolute inset-x-0 h-px bg-black/10 dark:bg-white/10 transition-colors duration-300" />
 
                 {/* 2. Left Bleed Line (shoots off to the left edge of the monitor) */}
