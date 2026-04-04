@@ -72,7 +72,6 @@ function DockItem({
             onFocus={() => isHovered.set(1)}
             onBlur={() => isHovered.set(0)}
             onClick={onClick}
-            // Updated hover effect for light and dark modes
             className={`relative inline-flex items-center justify-center rounded-full bg-transparent hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition-colors cursor-pointer ${className}`}
             tabIndex={0}
             role="button"
@@ -104,8 +103,8 @@ function DockLabel({ children, isHovered }: { children: React.ReactNode; isHover
                     animate={{ opacity: 1, y: -10 }}
                     exit={{ opacity: 0, y: 0 }}
                     transition={{ duration: 0.15 }}
-                    // Tooltip updated for light and dark modes
-                    className="absolute -top-10 left-1/2 w-fit whitespace-pre rounded-md border border-black/10 dark:border-white/10 bg-white/90 dark:bg-[#0a0a0c]/90 backdrop-blur-md px-3 py-1.5 text-[11px] font-mono tracking-wide text-black dark:text-white shadow-xl pointer-events-none transition-colors duration-300"
+                    // Added `hidden sm:block` so tooltips don't get stuck open on touch devices
+                    className="hidden sm:block absolute -top-10 left-1/2 w-fit whitespace-pre rounded-md border border-black/10 dark:border-white/10 bg-white/90 dark:bg-[#0a0a0c]/90 backdrop-blur-md px-3 py-1.5 text-[11px] font-mono tracking-wide text-black dark:text-white shadow-xl pointer-events-none transition-colors duration-300"
                     style={{ x: '-50%' }}
                 >
                     {children}
@@ -125,6 +124,20 @@ export default function Dock({
 }: DockProps) {
     const mouseX = useMotionValue(Infinity);
     const isHovered = useMotionValue(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect mobile screens or touch-first devices to disable expansion
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768 || window.matchMedia("(hover: none)").matches);
+        };
+        checkMobile(); // Check immediately on mount
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // If mobile, activeMagnification equals baseItemSize, meaning NO size transformation occurs!
+    const activeMagnification = isMobile ? baseItemSize : magnification;
 
     return (
         <div className="fixed bottom-8 left-0 right-0 z-50 flex justify-center pointer-events-none">
@@ -137,13 +150,11 @@ export default function Dock({
                     isHovered.set(0);
                     mouseX.set(Infinity);
                 }}
-                // Dock container updated to support light/dark backgrounds and borders
                 className={`${className} pointer-events-auto flex items-center justify-center gap-1 rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-[#050505]/60 backdrop-blur-2xl p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-black/5 dark:ring-white/5 noisy-glass transition-colors duration-300`}
                 role="toolbar"
                 aria-label="Application dock"
             >
                 {items.map((item, index) => {
-                    // Separator updated for light and dark modes
                     if (item.isSeparator) {
                         return <div key={index} className="w-px h-6 bg-black/10 dark:bg-white/10 mx-1.5 shrink-0 transition-colors duration-300" />;
                     }
@@ -156,10 +167,10 @@ export default function Dock({
                             mouseX={mouseX}
                             spring={spring}
                             distance={distance}
-                            magnification={magnification}
+                            // Pass the neutralized magnification value here
+                            magnification={activeMagnification}
                             baseItemSize={baseItemSize}
                         >
-                            {/* THE FIX: Changed text-white/60 to text-black/60 dark:text-white/60 */}
                             <div className="flex items-center justify-center text-black/60 dark:text-white/60 transition-colors duration-300">
                                 {item.icon}
                             </div>
